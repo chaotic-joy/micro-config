@@ -2,6 +2,8 @@
 
 A clean, friendly configurator for the **Work Louder Creator Micro** (including the Figma edition). Remap keys and knobs, write macros and tune lighting, all in your browser. Nothing to install.
 
+**→ Open it: https://chaotic-joy.github.io/micro-config/**
+
 ## What makes it nicer than VIA
 
 - **Record shortcuts.** Click a key, hit *Record a shortcut*, and press the combo on your real keyboard (⌘⇧K, ⌥⌘G…).
