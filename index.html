@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Micro Config</title>
+  <meta name="description" content="A friendly configurator for the Work Louder Creator Micro. Remap keys, knobs, macros and lighting right in your browser.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23161513'/%3E%3Ccircle cx='10' cy='10' r='4' fill='%23ff5b24'/%3E%3Crect x='17' y='6' width='9' height='9' rx='2' fill='%23f3efe6'/%3E%3Crect x='6' y='17' width='9' height='9' rx='2' fill='%23f3efe6'/%3E%3Crect x='17' y='17' width='9' height='9' rx='2' fill='%23f3efe6'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&family=Martian+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="bar">
+    <div class="brand">
+      <span class="mark" aria-hidden="true"></span>
+      <span>Micro<em>Config</em></span>
+    </div>
+    <div class="status" id="status" data-state="off"><i></i><span>Not connected</span></div>
+    <div class="bar-actions">
+      <button class="ghost" id="exportBtn" hidden>Export</button>
+      <label class="ghost btn" id="importBtn" hidden>Import<input type="file" accept="application/json" hidden></label>
+      <button class="ghost" id="disconnectBtn" hidden>Disconnect</button>
+    </div>
+  </header>
+
+  <main id="app" data-mode="landing">
+    <section class="stage">
+      <div class="layers" id="layers" role="tablist" aria-label="Layers"></div>
+      <div class="device-wrap">
+        <div class="device" id="device"></div>
+      </div>
+      <p class="hint" id="hint">Click a key or knob to change what it does.</p>
+
+      <div class="landing">
+        <h1>Make your Micro<br>do <span>exactly</span> what you want.</h1>
+        <p>Plug in your Creator Micro, then connect. Your changes save to the device as you make them.</p>
+        <div class="cta">
+          <button class="primary" id="connectBtn">Connect Micro</button>
+          <button class="ghost" id="demoBtn">Try the demo</button>
+        </div>
+        <p class="note" id="hidNote" hidden>Your browser can’t talk to USB devices. Open this page in <b>Chrome</b>, <b>Edge</b>, <b>Arc</b> or <b>Brave</b> on desktop. The demo still works here.</p>
+      </div>
+    </section>
+
+    <aside class="panel">
+      <nav class="tabs" role="tablist">
+        <button role="tab" data-tab="keys" aria-selected="true">Keys</button>
+        <button role="tab" data-tab="macros">Macros</button>
+        <button role="tab" data-tab="lighting">Lighting</button>
+      </nav>
+
+      <div class="tab" data-tab="keys">
+        <div class="inspector" id="inspector"></div>
+        <div class="picker">
+          <button class="record" id="recordBtn">
+            <span class="rec-dot"></span>
+            <span class="rec-text">Record a shortcut</span>
+            <span class="rec-sub">Click, then press keys on your keyboard</span>
+          </button>
+          <div class="mods" id="mods" aria-label="Add modifiers"></div>
+          <input type="search" id="search" placeholder="Search keys, actions, Figma shortcuts…" autocomplete="off">
+          <div class="cats" id="cats"></div>
+          <div class="grid" id="grid"></div>
+        </div>
+      </div>
+
+      <div class="tab" data-tab="macros" hidden>
+        <div class="sec-head">
+          <h2>Macros</h2>
+          <span class="meter" id="macroMeter"></span>
+        </div>
+        <p class="help">Type text to send, and use <code>{Cmd+Shift+K}</code> for shortcuts, <code>{Enter}</code> for keys and <code>{200ms}</code> to pause. Assign a macro to a key from the <b>Macros</b> category on the Keys tab.</p>
+        <div id="macroList" class="macro-list"></div>
+        <div class="sticky-save"><span id="macroErr" class="err"></span><button class="primary" id="macroSave" disabled>Save macros</button></div>
+      </div>
+
+      <div class="tab" data-tab="lighting" hidden>
+        <div id="lighting"></div>
+      </div>
+    </aside>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="src/app.js"></script>
+</body>
+</html>
